@@ -41,15 +41,22 @@
 </head>
 <body>
     <div class="container">
-        <h1>Symptom Checker.</h1>
+        <h1>Symptom Checker</h1>
         <p>Please list the symptoms you are experiencing in the text area below:</p>
-        <textarea id="symptoms" placeholder="e.g., headache, fever, nausea" rows="1"></textarea>
+        <textarea id="symptoms" placeholder="e.g., headache, fever, nausea"></textarea>
+	<br>
+    	<input type="checkbox" id="partialMatch"> Show partial matches
+    	<br><br>
         <button onclick="checkSymptoms()">Check Symptoms</button>
         <div class="results" id="results"></div>
     </div>
     <script>
         function checkSymptoms() {
             const symptoms = document.getElementById('symptoms').value.toLowerCase().split(',').map(s => s.trim());
+		const partialMatch = document.getElementById('partialMatch').checked;
+		const resultsDiv = document.getElementById('results');
+		resultsDiv.innerHTML = '<h2>Possible Diseases:</h2>';
+
             const diseases = {
                 'headache': ['Migraine', 'Tension headache', 'Cluster headache'],
                     'fever': ['Flu', 'COVID-19', 'Malaria'],
@@ -144,14 +151,30 @@
                     'missed periods': ['Pregnancy', 'Polycystic Ovary Syndrome (PCOS)', 'Thyroid Disorders'],
                     'hot flashes': ['Menopause', 'Hyperthyroidism']
                   };
-            let possibleDiseases = new Set();
-            symptoms.forEach(symptom => {
+        
+	    let possibleDiseases = new Set();
+        symptoms.forEach(symptom => {
+		    const matches = constantArray.filter(item => 
+                       partialMatch ? item.includes(symptom) : item === symptom
+                    );
+
+                    if (matches.length > 0) {
+                        const heading = document.createElement('div');
+                        heading.className = 'result-heading';
+                        heading.textContent = `Search: ${symptom}`;
+                        resultsDiv.appendChild(heading);
+
+                        matches.forEach(match => {
+                            const matchDiv = document.createElement('div');
+                            matchDiv.textContent = match;
+                            resultsDiv.appendChild(matchDiv);
+                        });
+
+		
                 if (diseases[symptom]) {
                     diseases[symptom].forEach(disease => possibleDiseases.add(disease));
                 }
             });
-            const resultsDiv = document.getElementById('results');
-            resultsDiv.innerHTML = '<h2>Possible Diseases:</h2><ul>' + Array.from(possibleDiseases).map(disease => `<li>${disease}</li>`).join('') + '</ul>';
         }
     </script>
 </body>
