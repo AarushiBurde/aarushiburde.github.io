@@ -44,17 +44,15 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Symptom Checker</h1>
-        <p>Please list the symptoms you are experiencing in the text area below, separated by commas...:</p>
-        <textarea id="symptoms" placeholder="e.g., headache, fever, nausea"></textarea>
+	<h1>Symptom Checker</h1>
+	<p>-Please list the symptoms you are experiencing in the text area below, separated by commas...:</p>
+	<textarea id="symptoms" placeholder="e.g., headache, fever, nausea"></textarea>
 	<br>
-    	input type="checkbox" id="partialMatch"> Show partial matches
-    	<br><br>
-        <button onclick="checkSymptoms()">Check Symptoms</button>
-        <div class="results" id="results"></div>
-    </div>
-    <script>
+	input type="checkbox" id="partialMatch"> Show partial matches
+	<br><br>
+	<button onclick="checkSymptoms()">Check Symptoms</button>
+	<div class="results" id="results"></div>
+    	<script>
         const diseases = {
                 'headache': ['Migraine', 'Tension headache', 'Cluster headache'],
                     'fever': ['Flu', 'COVID-19', 'Malaria'],
