@@ -152,7 +152,6 @@
                     'hot flashes': ['Menopause', 'Hyperthyroidism']
                   };
         
-	    let possibleDiseases = new Set();
         symptoms.forEach(symptom => {
 		    const matches = constantArray.filter(item => 
                        partialMatch ? item.includes(symptom) : item === symptom
@@ -169,13 +168,9 @@
                             matchDiv.textContent = match;
                             resultsDiv.appendChild(matchDiv);
                         });
-
-		
-                if (diseases[symptom]) {
-                    diseases[symptom].forEach(disease => possibleDiseases.add(disease));
-                }
-            });
-        }
+		    }
+		}
+	}
     </script>
 </body>
 </html>
