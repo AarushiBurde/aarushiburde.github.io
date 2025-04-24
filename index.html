@@ -45,11 +45,10 @@
 </head>
 <body>
 	<h1>Symptom Checker</h1>
-	<p>-Please list the symptoms you are experiencing in the text area below, separated by commas...:</p>
+	<p>--Please list the symptoms you are experiencing in the text area below, separated by commas...:</p>
 	<textarea id="symptoms" placeholder="e.g., headache, fever, nausea"></textarea>
 	<br>
-	input type="checkbox" id="partialMatch"> Show partial matches
-	<br><br>
+	<input type="checkbox" id="partialMatch"> Show partial matches <br><br>
 	<button onclick="checkSymptoms()">Check Symptoms</button>
 	<div class="results" id="results"></div>
     	<script>
@@ -156,8 +155,7 @@
         	symptoms.forEach(symptom => {
 			if (symptom) {
 	                    const matches = Object.entries(diseases).filter(([key, value]) => 
-	                        partialMatch ? key.includes(symptom) : key === symptom
-	                    );
+	                        partialMatch ? key.includes(symptom) : key === symptom);
 	
 	                    if (matches.length > 0) {
 	                        const heading = document.createElement('div');
