@@ -151,25 +151,28 @@
 		const partialMatch = document.getElementById('partialMatch').checked;
 		const resultsDiv = document.getElementById('results');
 		resultsDiv.innerHTML = '<h2>Possible Diseases:</h2>';
+		const matchedKeys = new Set();
         	symptoms.forEach(symptom => {
 			if (symptom) {
 	                    const matches = Object.entries(diseases).filter(([key, value]) => 
 	                        partialMatch ? key.includes(symptom) : key === symptom);
 	
 	                    if (matches.length > 0) {
-	                        const heading = document.createElement('div');
-	                        heading.className = 'result-heading';
-	                        heading.textContent = `Symptoms for: ${symptom}`;
-	                        resultsDiv.appendChild(heading);
-	
 	                        matches.forEach(([key, diseases]) => {
-	                            diseases.forEach(disease => {
-	                                const matchDiv = document.createElement('div');
-	                                matchDiv.className = 'results-text';
-					matchDiv.textContent = disease;
-	                                resultsDiv.appendChild(matchDiv);
-	                            });
-	                        });
+		                        if (!matchedKeys.has(key)) {
+		                            matchedKeys.add(key);
+		                            const heading = document.createElement('div');
+		                            heading.className = 'result-heading';
+		                            heading.textContent = `Symptom for: ${key}`;
+		                            resultsDiv.appendChild(heading);
+		
+		                            diseases.forEach(disease => {
+		                                const matchDiv = document.createElement('div');
+		                                matchDiv.textContent = disease;
+		                                resultsDiv.appendChild(matchDiv);
+		                            });
+	                        	}
+                    		});
 	                    }
 			}
                 });
