@@ -31,6 +31,10 @@
             margin-top: 20px;
 		margin-left: 100px;
         }
+	.results-text {
+            margin-top: 10px;
+		margin-left: 20px;
+        }
 	.result-heading {
         	font-weight: bold;
         	margin-top: 10px;
@@ -161,7 +165,7 @@
 	                        matches.forEach(([key, diseases]) => {
 	                            diseases.forEach(disease => {
 	                                const matchDiv = document.createElement('div');
-	                                matchDiv.className = 'result';
+	                                matchDiv.className = 'results-text';
 					matchDiv.textContent = disease;
 	                                resultsDiv.appendChild(matchDiv);
 	                            });
