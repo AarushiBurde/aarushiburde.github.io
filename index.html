@@ -168,6 +168,7 @@
 		
 		                            diseases.forEach(disease => {
 		                                const matchDiv = document.createElement('div');
+						matchDiv.className = 'results-text';
 		                                matchDiv.textContent = disease;
 		                                resultsDiv.appendChild(matchDiv);
 		                            });
